@@ -43,7 +43,7 @@ library(rgbif)          # To use GBIF services
 Create a data frame `input_data` from the source data:
 
 ```{r}
-input_data <- read_excel(path = here("data", "raw", "GranCanaria_ES_TOTAL_v1.xlsx")) 
+input_data <- read_excel(path = here("data", "raw", "NorthernSpain_ES_TOTAL_v1.xlsx")) 
 ```
 
 Preview data:
@@ -60,6 +60,7 @@ Clean data somewhat:
 
 ```{r}
 input_data %<>% remove_empty("rows")
+input_data %<>% select(-c(island, islandGroup))
 ```
 
 ## Scientific names
@@ -104,15 +105,9 @@ Correct names and reparse:
 
 ```{r correct and reparse}
 input_data %<>% mutate(scientificname = recode(verbatimScientificName,
-  "Gibbulinella aff. dealbata" = "Gibbulinella dealbata",
-  "Hemicycla cf. gaudryi" = "Hemicycla gaudryi",
-  "Xerotricha aff. orbignii" = "Xerotricha orbignii",
-  "Napaeus cf. venegueraensis" = "Napaeus venegueraensis",
-  "Monilearia cf. praeposita" = "Monilearia praeposita",
-  "Gibbulinella aff. dewinteri" = "Gibbulinella dewinteri",
-  "Pomatias aff. laevigatus" = "Pomatias laevigatus",
-  "Physella cf. acuta" = "Physella acuta",
-  "Hemicycla psathyra cf. temperata" = "Hemicycla psathyra temperata"
+ "Euglesa cf. casertana" = "Euglesa casertana",
+  "Potamopyrgus antipodarum f. carinata" = "Potamopyrgus antipodarum carinata",
+  "Euglesa aff. globulare" = "Euglesa globulare"
 ))
 ```
 
@@ -218,7 +213,7 @@ occurrence %<>% mutate(rightsHolder = "UGent") # e.g. "INBO"
 ### datasetID
 
 ```{r}
-occurrence %<>% mutate(datasetID = "https://doi.org/10.15468/ny1f9n") # e.g. "https://doi.org/10.15468/xvuzfh"
+occurrence %<>% mutate(datasetID = "my_doi") # e.g. "https://doi.org/10.15468/xvuzfh"
 ```
 
 ### institutionCode
