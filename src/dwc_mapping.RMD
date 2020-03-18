@@ -213,7 +213,7 @@ occurrence %<>% mutate(rightsHolder = "UGent") # e.g. "INBO"
 ### datasetID
 
 ```{r}
-occurrence %<>% mutate(datasetID = "my_doi") # e.g. "https://doi.org/10.15468/xvuzfh"
+occurrence %<>% mutate(datasetID = "https://doi.org/10.15468/wfiktk") # e.g. "https://doi.org/10.15468/xvuzfh"
 ```
 
 ### institutionCode
