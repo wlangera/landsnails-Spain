@@ -1,6 +1,6 @@
 ---
 title: "Darwin Core mapping"
-subtitle: "For: Landsnails from Spain & Gran Canaria"
+subtitle: "For: Landsnails from Spain"
 author:
 - Ward Langeraert
 - Dimitri Brosens
