@@ -1,8 +1,7 @@
 # landsnails-occurrences
 Research Project Landsnails
 
-# Landsnails in Spain & Gran Canaria
-
+# Landsnails in Spain
 
 ## Rationale
 
