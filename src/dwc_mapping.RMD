@@ -105,7 +105,7 @@ Correct names and reparse:
 
 ```{r correct and reparse}
 input_data %<>% mutate(scientificname = recode(verbatimScientificName,
- "Euglesa cf. casertana" = "Euglesa casertana",
+  "Euglesa cf. casertana" = "Euglesa casertana",
   "Potamopyrgus antipodarum f. carinata" = "Potamopyrgus antipodarum carinata",
   "Euglesa aff. globulare" = "Euglesa globulare"
 ))
@@ -139,6 +139,22 @@ input_data %<>% left_join(
   parsed_names %>%
   select (scientificname, rankmarker),
   by = c("scientificname" = "scientificname"))
+```
+
+```{r}
+# Adjust rankmarker
+input_data %<>% mutate(rankmarker = recode(verbatimScientificName,
+  "Obscurella spec." = "genus",
+  "Alzoniella spec." = "genus",
+  "Deroceras spec." = "genus",
+  "Vitrea spec." = "genus",
+  "Helicella spec." = "genus",
+  "Hygromiidae spec." = "family",
+  "Gastropoda spec." = "class",
+  "Arion (Arion) spec." = "subgenus",
+  "Arion (Kobeltia) spec.." = "subgenus",
+  .default = rankmarker
+))
 ```
 
 ## Taxon IDs
@@ -287,10 +303,14 @@ Map values by recoding to the [GBIF rank vocabulary](http://rs.gbif.org/vocabula
 
 ```{r}
 occurrence %<>% mutate(taxonRank = recode(rankmarker,
-  "infrasp."  = "infraspecificname",
+  "infrasp."  = "subspecies",
   "sp."       = "species",
   "var."      = "variety",
-  "f."      = "form",
+  "f."        = "form",
+  "genus"     = "genus",
+  "subgenus"  = "subgenus",
+  "family"    = "family",
+  "class"     = "class",
   .default    = "",
   .missing    = ""
 ))
@@ -302,6 +322,7 @@ Inspect mapped values:
 occurrence %>%
   group_by(rankmarker, taxonRank) %>%
   count()
+occurrence %<>% select(-rankmarker)
 ```
 
 ### nomenclaturalCode
